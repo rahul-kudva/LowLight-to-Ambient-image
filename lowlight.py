@@ -49,12 +49,6 @@ else:
     print("[-] No GPU found. TensorFlow will use the CPU.")
 
 
-# # Creating Functions
-
-# ## Defining Discriminator
-
-# In[30]:
-
 
 def define_discriminator(img_shape):
     initializer = RandomNormal(stddev=0.02)
@@ -96,9 +90,7 @@ def define_discriminator(img_shape):
     return model
 
 
-# ## Defining Generator
 
-# In[31]:
 
 
 def define_generator(img_shape=(256, 256, 3)):
@@ -152,9 +144,6 @@ def define_generator(img_shape=(256, 256, 3)):
     return model
 
 
-# ## Initializing GAN training
-
-# In[32]:
 
 
 def define_gan(generator_model, discriminator_model, img_shape):
@@ -173,9 +162,7 @@ def define_gan(generator_model, discriminator_model, img_shape):
     return model
 
 
-# ## Loading Real Samples
 
-# In[6]:
 
 
 def load_real_samples(filename):
@@ -186,9 +173,7 @@ def load_real_samples(filename):
 	return [X2, X1]
 
 
-# ## Generating Real Fake Samples
 
-# In[7]:
 
 
 def generate_real_samples(dataset, n_samples, patch_shape):
@@ -199,9 +184,7 @@ def generate_real_samples(dataset, n_samples, patch_shape):
 	return [X1, X2], y
 
 
-# ## Generating Fake Samples
 
-# In[8]:
 
 
 def generate_fake_samples(g_model, samples, patch_shape):
@@ -210,9 +193,6 @@ def generate_fake_samples(g_model, samples, patch_shape):
 	return X, y
 
 
-# ## Summarizing Training and Saving Model
-
-# In[9]:
 
 
 def summarize_performance(step, g_model, d_model, dataset, n_samples=3):
@@ -249,9 +229,6 @@ def summarize_performance(step, g_model, d_model, dataset, n_samples=3):
     print('[.] Saved Model: %s' % (filename3))
 
 
-# ## Training Function
-
-# In[38]:
 
 
 def train(d_model, g_model, gan_model, dataset, n_epochs=40, n_batch=12):
@@ -280,12 +257,6 @@ def train(d_model, g_model, gan_model, dataset, n_epochs=40, n_batch=12):
             summarize_performance(i, g_model, d_model, dataset)
 
 
-# # Main Function
-
-# ## Loading Dataset
-
-# In[11]:
-
 
 dataset = load_real_samples('dataset.npz')
 print('Loaded', dataset[0].shape, dataset[1].shape)
@@ -311,9 +282,7 @@ image_shape = dataset[0].shape[1:]
 print('Loaded', dataset[0].shape, dataset[1].shape)
 
 
-# ## Defining Models
 
-# In[33]:
 
 
 d_model = define_discriminator(image_shape)
@@ -321,9 +290,7 @@ g_model = define_generator(image_shape)
 gan_model = define_gan(g_model, d_model, image_shape)
 
 
-# ## Creating model Directory and Calling Train Function
 
-# In[ ]:
 
 
 fileName = 'Enhancement Model'
@@ -336,15 +303,14 @@ os.mkdir(model_output)
 train(d_model, g_model, gan_model, dataset,80, 4)
 
 
-# # Testing
+#Testing
 
-# In[41]:
+
 
 
 def normalize_image(img):
     return (img / 127.5) - 1
 
-# Function to denormalize an image to [0, 255] range
 def denormalize_image(img):
     return np.clip((img + 1) * 127.5, 0, 255).astype(np.uint8)
 
