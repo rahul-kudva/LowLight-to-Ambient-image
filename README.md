@@ -40,8 +40,6 @@ To test using the provided pretrained model:
    ./run.sh
 
 ## Provided Files
-
-- test_dataset.npz: Sample test dataset
 - gen_model_009680.h5: Pretrained model
 
 These can be used directly with run.sh for quick testing or demonstration.
