@@ -1,31 +1,47 @@
-**                                                                          Low Light to Ambient Image Converter
-**
-Steps to train and test the model on your data
+# Low-Light to Ambient Image Converter
 
-Step 1:
+This project enhances low-light images by converting them into well-lit, ambient-style images using a deep learning model.
 
-Get the dataset in the following format
+## Model Training and Testing Guide
 
-Data
-/High
-/Low
+### Step 1: Prepare the Dataset
 
-Place the ground truth images in High folder, and low light images in Low folder
+Organize your dataset in the following structure:
 
-Do the same for test dataset.
+Data/
+├── High/   # Ground truth ambient images
+└── Low/    # Corresponding low-light input images
 
-Step 2:
+Do the same for your test dataset.
 
-Replace the folder name in data_process.py with your folder name and then convert the dataset to an npz file
+### Step 2: Preprocess the Dataset
 
-Step 3:
+1. Open data_process.py
+2. Update the folder paths to match your dataset
+3. Run the script to generate a .npz file from your images
 
-Replace the npz file name in lod.py file, and run the file. Both training and test code is present in the file.
+### Step 3: Train and Test the Model
 
+1. Open lod.py
+2. Replace the dataset file path with your generated .npz file
+3. Run the script to train and evaluate the model
+   (Both training and testing logic are included in the same file)
 
-Steps to run the run.sh file
+## Running with Pretrained Model
 
-You can provide your own test_dataset.npz file and the model file in /Code directory and then run the run.sh file
+To test using the provided pretrained model:
 
-For convenience I have provided a sample test_dataset.npz file and a  model file (gen_model_009680.h5), which you
-can use to run the run.sh file.
+1. Navigate to the /Code directory
+2. Ensure the following files are present:
+   - test_dataset.npz
+   - gen_model_009680.h5 (pretrained model)
+3. Run the script:
+
+   ./run.sh
+
+## Provided Files
+
+- test_dataset.npz: Sample test dataset
+- gen_model_009680.h5: Pretrained model
+
+These can be used directly with run.sh for quick testing or demonstration.
